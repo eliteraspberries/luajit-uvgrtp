@@ -120,3 +120,7 @@ mkdir build
 cd build
 cmake ${CMAKE_ARGS} ..
 make
+
+DESTDIR="${dir}/build/${TARGET}"
+mkdir -p "${DESTDIR}"
+make install DESTDIR="${DESTDIR}"
