@@ -10,6 +10,9 @@ SYS:=		$(shell echo "$(TARGET)" | awk -F- '{print $$3}')
 
 CFLAGS+=	--target=$(TARGET)
 CXXFLAGS+=	--target=$(TARGET)
+CXXFLAGS+=	-stdlib=libc++
+CXXFLAGS+=	-std=c++11
+LDFLAGS+=	-stdlib=libc++ -lc++
 
 ifeq ("$(SYS)","darwin")
 SDKROOT:=	$(shell xcrun --sdk macosx --show-sdk-path)
