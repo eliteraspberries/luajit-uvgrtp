@@ -51,7 +51,8 @@ ifeq ($(shell uname -s),Darwin)
 DYLD_LIBRARY_PATH:=	$(shell pwd)/build/$(TARGET)/lib:$(DYLD_LIBRARY_PATH)
 LUA:=				DYLD_LIBRARY_PATH="$(DYLD_LIBRARY_PATH)" luajit
 else
-LUA:=				luajit
+LD_LIBRARY_PATH:=	$(shell pwd)/build/$(TARGET)/lib:$(LD_LIBRARY_PATH)
+LUA:=				LD_LIBRARY_PATH="$(LD_LIBRARY_PATH)" luajit
 endif
 LUA_CPATH:=			$(shell pwd)/build/$(TARGET)/lib/?
 
