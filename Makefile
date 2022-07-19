@@ -1,6 +1,7 @@
 AR?=		ar
 CC?=		clang
 CXX?=		clang++
+LD?=		$(CXX)
 
 ifeq ("$(TARGET)","")
 TARGET:=	$(shell $(CXX) $(CXXFLAGS) -dumpmachine | sed -e 's/[0-9.]*$$//')
