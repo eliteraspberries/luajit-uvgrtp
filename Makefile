@@ -76,7 +76,8 @@ test: uvgrtp.lua so
 
 .PHONY: cleanup
 cleanup:
-	rm -rf uvgRTP-[0-9].[0-9].[0-9]
+	rm -rf uvgRTP-[0-9].[0-9].[0-9] uvgRTP-master
+	rm -f build/$(TARGET)/*.o
 
 .PHONY: clean
 clean: cleanup
