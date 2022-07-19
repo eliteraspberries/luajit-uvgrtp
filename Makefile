@@ -9,6 +9,7 @@ endif
 SYS:=		$(shell echo "$(TARGET)" | awk -F- '{print $$3}')
 
 CFLAGS+=	--target=$(TARGET)
+CXXFLAGS+=	--target=$(TARGET)
 
 ifeq ("$(SYS)","darwin")
 SDKROOT:=	$(shell xcrun --sdk macosx --show-sdk-path)
