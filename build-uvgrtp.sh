@@ -24,8 +24,8 @@ MAKE="${MAKE:=make}"
 
 TARGET="${TARGET:=$(${CC} ${CFLAGS} -dumpmachine | sed -e 's/[0-9.]*$//')}"
 
-test -f "build/${TARGET}/lib/libuvgsrt.dylib" && exit 0
-test -f "build/${TARGET}/lib/libuvgsrt.so" && exit 0
+test -f "build/${TARGET}/lib/libuvgrtp.dylib" && exit 0
+test -f "build/${TARGET}/lib/libuvgrtp.so" && exit 0
 
 DESTDIR="${DESTDIR:=${dir}/build/${TARGET}}"
 PREFIX="${PREFIX:=/.}"
