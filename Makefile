@@ -26,7 +26,26 @@ LDFLAGS+=	--sysroot=$(SDKROOT)
 CFLAGS+=	-mmacosx-version-min=10.9
 CXXFLAGS+=	-mmacosx-version-min=10.9
 LDFLAGS+=	--target=$(TARGET)
+SOEXT:=		.dylib
 endif
+
+ifeq ("$(SYS)","ios")
+SDKROOT:=	$(shell xcrun --sdk iphoneos --show-sdk-path)
+AR:=		$(shell xcrun --sdk iphoneos --find $(AR))
+CC:=		$(shell xcrun --sdk iphoneos --find $(CC))
+CXX:=		$(shell xcrun --sdk iphoneos --find $(CXX))
+CPPFLAGS+=	-isysroot $(SDKROOT)
+CFLAGS+=	--sysroot=$(SDKROOT)
+CXXFLAGS+=	--sysroot=$(SDKROOT)
+LDFLAGS+=	--sysroot=$(SDKROOT)
+CFLAGS+=	-miphoneos-version-min=9.0
+CXXFLAGS+=	-miphoneos-version-min=9.0
+LDFLAGS+=	-Wl,-ios_version_min,9.0
+LDFLAGS+=	--target=$(TARGET)
+SOEXT:=		.dylib
+endif
+
+SOEXT?=		.so
 
 ifeq ($(shell uname -s),Darwin)
 DYLD_LIBRARY_PATH:=	$(shell pwd)/build/$(TARGET)/lib:$(DYLD_LIBRARY_PATH)
