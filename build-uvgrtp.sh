@@ -8,8 +8,13 @@ dir="$(cd $(dirname $0) && pwd)"
 test -f uvgRTP-master.zip || \
     curl -L -o uvgRTP-master.zip \
     https://github.com/ultravideo/uvgRTP/archive/refs/heads/master.zip
-test -d uvgRTP-master || unzip uvgRTP-master.zip
-patch -d uvgRTP-master -f -p1 < ${dir}/patches/patch-uvgRTP-master.txt || true
+test -d uvgRTP-master || (
+    unzip uvgRTP-master.zip
+    for patch in ${dir}/patches/patch-*.txt; do
+        patch -d uvgRTP-master -f -p1 < ${patch}
+    done
+    find uvgRTP-master | grep -e '[.]orig$' -e '[.]rej$' | xargs rm -f
+) || true
 
 AR="${AR:=ar}"
 CC="${CC:=clang}"
