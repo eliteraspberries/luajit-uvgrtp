@@ -63,6 +63,13 @@ lib:
 uvgrtp: lib
 	sh build-uvgrtp.sh
 
+ifneq ("$(wildcard build/$(TARGET)/uvgrtp.pc)","")
+PKG_CONFIG_PATH:=	build/$(TARGET)/:$(PKG_CONFIG_PATH)
+PKG_CONFIG:=		PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)" pkg-config
+UVGRTP_CXXFLAGS+=	$(shell $(PKG_CONFIG) --cflags uvgRTP)
+UVGRTP_LDFLAGS+=	$(shell $(PKG_CONFIG) --libs uvgRTP)
+endif
+
 .PHONY: so
 so: uvgrtp
 
